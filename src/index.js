@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import './style.css';
 import { FormGenerator } from './FormGenerator';
 import { FormValidator } from './FormValidator';
 

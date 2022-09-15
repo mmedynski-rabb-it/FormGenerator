@@ -9,16 +9,22 @@ export class FormValidator {
 
         for(let i in this.json)
         {
-            let object = this.json[i];
             element[i] = document.createElement("input");
-            let keys = Object.keys(object);
-            for(let k in keys) {
-                element[i].type = (this.json[i].type) ? this.json[i].type : '';
-                element[i].id = (this.json[i].id) ? this.json[i].id : '';
-                element[i].name = (this.json[i].name) ? this.json[i].name : '';
-                element[i].label = (this.json[i].label) ? this.json[i].label : '';
-                element[i].required = (this.json[i].required) ? this.json[i].required : '';
-                element[i].autofocus = (this.json[i].autofocus) ? this.json[i].autofocus : '';
+            element[i].type = (this.json[i].type) ? this.json[i].type : '';
+            element[i].id = (this.json[i].id) ? this.json[i].id : '';
+            element[i].name = (this.json[i].name) ? this.json[i].name : '';
+            element[i].required = (this.json[i].required) ? this.json[i].required : '';
+            element[i].autofocus = (this.json[i].autofocus) ? this.json[i].autofocus : '';
+
+            if (this.json[i].type == 'password' || this.json[i].type == 'email' || this.json[i].type == 'text') {
+                let inputElement = document.getElementById(element[i].id);
+                let parentElement = document.getElementById('form-login');
+                let labelElement = document.createElement("label");
+                labelElement.htmlFor = this.json[i].id;
+                labelElement.innerHTML = this.json[i].label;
+                parentElement.insertBefore(labelElement, inputElement)
+            } else if (this.json[i].type == 'reset' || this.json[i].type == 'submit') {
+                element[i].value = this.json[i].label;
             }
 
             document.getElementById('form-login').appendChild(element[i])
